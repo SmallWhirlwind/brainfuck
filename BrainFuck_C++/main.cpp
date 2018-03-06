@@ -12,16 +12,14 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
     string brainfuck = "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.";
-    string brainfuck01 = ">>>++[<++++++++[<[<++>-]>>[>>]+>>+[-[->>+<<<[<[<<]<+>]>[>[>>]]]<[>>[-]]>[>[-<<]>[<+<]]+<<]<[>+<-]>>-]<.[-]>>]";
-    brainfuck=brainfuck01;
     int turing[100];
     for(int i=0;i<100;i++){
         turing[i]=0;
     }
-    int go=0;
+    int left_bracket=0;
     int id=0;
-    int re=0;
-    int n;
+    int right_bracket=0;
+    int input;
     for(int index=0;index<brainfuck.length();index++){
         switch (brainfuck[index]) {
             case '>':
@@ -40,39 +38,39 @@ int main(int argc, const char * argv[]) {
                 cout<<(char)turing[id];
                 break;
             case ',':
-                cin>>n;
-                turing[id]=n;
+                cin>>input;
+                turing[id]=input;
                 break;
             case '[':
                 if(turing[id]==0){
-                    go=0;
+                    left_bracket=0;
                     while (index<brainfuck.length()) {
                         index++;
-                        if(brainfuck[index]==']'&&go==0){
+                        if(brainfuck[index]==']'&&left_bracket==0){
                             break;
                         }
                         if(brainfuck[index]==']'){
-                            go--;
+                            left_bracket--;
                         }
                         if(brainfuck[index]=='['){
-                            go++;
+                            left_bracket++;
                         }
                     }
                 }
                 break;
             case ']':
                 if(turing[id]!=0){
-                    re=0;
+                    right_bracket=0;
                     while (index>=0) {
                         index--;
-                        if(brainfuck[index]=='['&&re==0){
+                        if(brainfuck[index]=='['&&right_bracket==0){
                             break;
                         }
                         if(brainfuck[index]==']'){
-                            re++;
+                            right_bracket++;
                         }
                         if(brainfuck[index]=='['){
-                            re--;
+                            right_bracket--;
                         }
                     }
                 }
