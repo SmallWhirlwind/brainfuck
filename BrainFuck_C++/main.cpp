@@ -20,6 +20,7 @@ int main(int argc, const char * argv[]) {
     int id=0;
     int right_bracket=0;
     int input;
+test1
     for(int index=0;index<brainfuck.length();index++){
         switch (brainfuck[index]) {
             case '>':
